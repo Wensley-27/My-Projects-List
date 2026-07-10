@@ -1,0 +1,237 @@
+/* ===========================
+   Global Website Theme
+=========================== */
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:#0F172A;
+
+    color:#F8FAFC;
+
+    line-height:1.7;
+
+}
+
+/* Professional Theme */
+
+:root{
+
+    --background:#0F172A;
+
+    --card:#1E293B;
+
+    --heading:#38BDF8;
+
+    --text:#F8FAFC;
+
+    --secondary:#CBD5E1;
+
+    --button:#2563EB;
+
+    --border:#334155;
+
+}
+
+/* This Creates a Premium 'glass' Effect */
+
+
+nav{
+
+    position:fixed;
+
+    width:100%;
+
+    top:0;
+
+    left:0;
+
+    background:rgba(15,23,42,.80);
+
+    backdrop-filter:blur(12px);
+
+    padding:20px;
+
+    z-index:1000;
+
+}
+
+
+/* This is where my background image appears */
+
+.hero{
+
+    height:100vh;
+
+    background-image:url("images/hero-background.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+/* Dark OverLay */
+
+.overlay{
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,.60);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+
+
+/* Profile Picture */
+
+.profile-image{
+
+    width:220px;
+
+    height:220px;
+
+    border-radius:50%;
+
+    border:5px solid #38BDF8;
+
+    object-fit:cover;
+
+    box-shadow:
+
+        0 0 20px #38BDF8,
+
+        0 0 45px rgba(56,189,248,.45);
+
+    margin-bottom:25px;
+
+}
+
+/* Headings */
+
+h1{
+
+    font-size:55px;
+
+    color:white;
+
+}
+
+h2{
+
+    color:#38BDF8;
+
+    margin-top:10px;
+
+}
+
+/* Section Cards */
+
+.about-card,
+.career-card,
+.experience-category{
+
+    background:#1E293B;
+
+    margin:40px auto;
+
+    width:90%;
+
+    max-width:1200px;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    transition:.4s;
+
+    box-shadow:
+
+        0 8px 20px rgba(0,0,0,.30);
+
+}
+
+
+
+/* Hover Effect */
+
+.about-card:hover,
+.career-card:hover,
+.experience-category:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+
+        0 15px 35px rgba(56,189,248,.35);
+
+}
+
+/* Buttons */
+
+button{
+
+    background:#2563EB;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 35px;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+    transition:.4s;
+
+}
+
+
+/* Hover */
+
+button:hover{
+
+    background:#38BDF8;
+
+}
+
+
+
