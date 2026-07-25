@@ -1,0 +1,202 @@
+{% load static %}
+<html lang="en">
+<head>
+<title>Wensley Rajkumar | Portfolio</title>
+<meta charset="utf-8">
+<meta name="description" content="Professional portfolio of Wensley Rajkumar, Senior DevOps & SRE Engineer.">
+
+<link rel="stylesheet" href="{% static 'mwstyle.css' %}">
+</head>
+<body>
+
+    <!-- About Me Section -->
+ <section id="about">
+    <h2>About Me</h2>
+
+    <div class="about-card">
+
+        <h3>Hello, I'm Wensley Rajkumar 👋</h3>
+
+        <p>
+            I am a <strong>Senior DevOps &amp; Site Reliability Engineer (SRE)</strong>
+            based in <strong>Bangalore, India</strong>, with a passion for building
+            reliable, scalable, and highly available cloud infrastructure.
+        </p>
+
+        <p>
+            Currently, I work at <strong>SLK Software Pvt. Ltd. (An Altimetrik Company)</strong>,
+            where I specialize in infrastructure automation, Kubernetes platform
+            engineering, CI/CD pipeline automation, cloud infrastructure, observability,
+            and production reliability. My primary focus is ensuring mission-critical
+            applications consistently achieve <strong>99.9% availability</strong> while
+            improving deployment efficiency and operational excellence.
+        </p>
+
+        <p>
+            Throughout my career, I have worked extensively with modern DevOps tools
+            including <strong>AWS, Kubernetes, Docker, Terraform, Jenkins, GitHub,
+            Prometheus, Grafana, Linux, and Python</strong> to automate infrastructure,
+            streamline deployments, and enhance system reliability.
+        </p>
+
+        <p>
+            I enjoy solving complex production challenges, automating repetitive tasks,
+            and continuously exploring emerging cloud-native technologies. I strongly
+            believe in continuous learning and strive to build secure, scalable, and
+            resilient platforms that empower development teams to deliver software
+            faster and more reliably.
+        </p>
+
+        <p>
+            My long-term goal is to grow as a Cloud, DevOps, and Site Reliability
+            Engineering professional while contributing to organizations that embrace
+            innovation, automation, and modern cloud technologies.
+        </p>
+
+    </div>
+</section>
+
+    <!-- Career Section -->
+<section id="career">
+    <h2>Career</h2>
+
+    <div class="career-card">
+        <h3>Senior DevOps &amp; Site Reliability Engineer (SRE)</h3>
+
+        <table>
+            <tr>
+                <th>Role</th>
+                <td>Senior DevOps &amp; Site Reliability Engineer</td>
+            </tr>
+            <tr>
+                <th>Domain</th>
+                <td>Banking &amp; Financial Payments</td>
+            </tr>
+            <tr>
+                <th>Project</th>
+                <td>Fifth Third Bancorp</td>
+            </tr>
+            <tr>
+                <th>Company</th>
+                <td>SLK Software Private Limited (An Altimetrik Company)</td>
+            </tr>
+            <tr>
+                <th>Timeline</th>
+                <td>2024 – Present</td>
+            </tr>
+        </table>
+    </div>
+
+    <br>
+
+    <div class="career-card">
+        <h3>DevOps Engineer</h3>
+
+        <table>
+            <tr>
+                <th>Role</th>
+                <td>DevOps Engineer</td>
+            </tr>
+            <tr>
+                <th>Domain</th>
+                <td>Banking &amp; Financial Payments</td>
+            </tr>
+            <tr>
+                <th>Project</th>
+                <td>FIS Global Solutions</td>
+            </tr>
+            <tr>
+                <th>Company</th>
+                <td>Tata Consultancy Services (TCS)</td>
+            </tr>
+            <tr>
+                <th>Timeline</th>
+                <td>2012 – 2023</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+    <!-- Work Experience Section -->
+   <section id="work-experience">
+    <h2>Work Experience</h2>
+
+    <div class="experience-category">
+        <h3>1. Kubernetes</h3>
+        <ul>
+            <li><strong>Capacity Planning &amp; Right-Sizing:</strong> Optimized CPU and memory requests/limits to improve cluster performance, reduce cloud costs, and prevent Out of Memory (OOM) events.</li>
+
+            <li><strong>Cluster Upgrades &amp; Patching:</strong> Planned and executed Kubernetes cluster upgrades using rolling and Blue/Green node pool strategies while ensuring minimal downtime.</li>
+
+            <li><strong>Advanced Troubleshooting:</strong> Diagnosed and resolved complex production issues involving DNS resolution, CNI networking, pod scheduling, etcd latency, and application failures.</li>
+
+            <li><strong>Security Hardening:</strong> Implemented RBAC, Network Policies, OPA/Kyverno policies, and Kubernetes security best practices to maintain compliance and secure workloads.</li>
+
+            <li><strong>Platform Engineering:</strong> Developed reusable Helm charts and Kubernetes deployment templates to enable self-service application deployments for development teams.</li>
+        </ul>
+    </div>
+
+    <div class="experience-category">
+        <h3>2. Terraform</h3>
+        <ul>
+            <li><strong>Infrastructure as Code:</strong> Built and maintained reusable, version-controlled Terraform modules for provisioning secure and standardized cloud infrastructure.</li>
+
+            <li><strong>State Management:</strong> Managed remote Terraform state using secure backends, performed state refactoring, and ensured consistency across environments.</li>
+
+            <li><strong>Drift Detection:</strong> Performed regular Terraform plan reviews and automated drift detection to keep deployed infrastructure aligned with source code.</li>
+
+            <li><strong>Governance &amp; Policy as Code:</strong> Enforced infrastructure compliance using tools such as Sentinel, tfsec, and security policies to prevent insecure cloud resource creation.</li>
+
+            <li><strong>Migration &amp; Modernization:</strong> Migrated manually provisioned infrastructure into Terraform and upgraded Terraform versions across multi-environment deployments.</li>
+        </ul>
+    </div>
+
+    <div class="experience-category">
+        <h3>3. CI/CD Pipeline Management</h3>
+        <ul>
+            <li><strong>Pipeline Architecture:</strong> Designed and maintained scalable CI/CD pipelines with automated testing, security scanning (SAST/DAST), artifact management, and deployment approvals.</li>
+
+            <li><strong>Pipeline Optimization:</strong> Improved build and deployment performance through caching, parallel execution, and Kubernetes-based build runners.</li>
+
+            <li><strong>Deployment Strategies:</strong> Implemented Blue/Green, Canary, Rolling, and Feature Flag deployment strategies to reduce deployment risk and downtime.</li>
+
+            <li><strong>Developer Experience (DevEx):</strong> Developed automation scripts and reusable pipeline templates that simplified application deployments for development teams.</li>
+        </ul>
+    </div>
+
+    <div class="experience-category">
+        <h3>4. Observability &amp; Site Reliability Engineering (SRE)</h3>
+        <ul>
+            <li><strong>SLO/SLI Management:</strong> Defined and monitored Service Level Indicators (SLIs) and Service Level Objectives (SLOs) to ensure application reliability and performance.</li>
+
+            <li><strong>Monitoring &amp; Alerting:</strong> Configured and optimized Prometheus, Grafana, and Datadog alerts to minimize alert fatigue and improve incident response.</li>
+
+            <li><strong>Distributed Tracing:</strong> Implemented OpenTelemetry-based tracing to identify latency bottlenecks across distributed microservices.</li>
+
+            <li><strong>Incident Management &amp; RCA:</strong> Performed root cause analysis (RCA) using logs, metrics, and traces, and implemented preventive automation to reduce recurring incidents.</li>
+
+            <li><strong>Cloud Cost Observability:</strong> Correlated infrastructure utilization metrics with cloud spending to identify optimization opportunities and improve cost efficiency.</li>
+        </ul>
+    </div>
+
+</section>
+
+<section id="Contact Me:">
+    <h2>Contact Me:</h2>
+
+    <div class="Contacts">
+        <h3>Contact Me:</h3>
+        <ul>
+            <li><strong>Phone:</strong> 72***97**3</li>
+
+            <li><strong>Email ID:</strong> wensleyrajkumar@outlook.com.</li>
+
+            <li><strong>LinkedIn:</strong> www.linkedin.com/in/wensly-rajkumar-312a1a299</li>
+			
+        </ul>
+    </div>
+
+</body>
+</html>
+
+
