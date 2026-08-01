@@ -1,0 +1,82 @@
+pipeline {
+    agent any
+
+    environment {
+        // Define your Docker image name and registry credentials ID here
+        DOCKER_IMAGE_NAME = "my-django-app"
+        DOCKER_CREDENTIALS_ID = "dockerhub-credentials-id" // Optional: Replace with your Jenkins credential ID if pushing to a registry
+        REGISTRY_URL = "docker.io" // Optional: Change to your private registry (e.g., AWS ECR, GCP Artifact Registry)
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking out source code from Git...'
+                checkout scm
+            }
+        }
+
+        stage('Build & Install Dependencies') {
+            steps {
+                echo 'Setting up Python virtual environment and installing dependencies...'
+                sh '''
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip install --upgrade pip
+                    pip install -r requirements.txt
+                '''
+            }
+        }
+
+        stage('Run Unit Tests') {
+            steps {
+                echo 'Running Django unit tests...'
+                sh '''
+                    . venv/bin/activate
+                    python manage.py test
+                '''
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                echo 'Building Docker container image...'
+                script {
+                    // Builds the Docker image using your Dockerfile
+                    app = docker.build("${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}")
+                    // Also tag it as 'latest' for convenience
+                    app.inside {
+                        // Optional container smoke tests can go here
+                    }
+                }
+            }
+        }
+
+        /* 
+        // Optional Stage: Push to Container Registry
+        stage('Push to Registry') {
+            steps {
+                script {
+                    docker.withRegistry("https://${REGISTRY_URL}", "${DOCKER_CREDENTIALS_ID}") {
+                        app.push("latest")
+                        app.push("${env.BUILD_NUMBER}")
+                    }
+                }
+            }
+        }
+        */
+    }
+
+    post {
+        always {
+            echo 'Pipeline execution finished.'
+            cleanWs() // Cleans up the workspace to save disk space on the Jenkins agent
+        }
+        success {
+            echo 'Pipeline succeeded! Your Django app is successfully built and containerized.'
+        }
+        failure {
+            echo 'Pipeline failed. Check the console output above for compilation, test, or build errors.'
+        }
+    }
+}
