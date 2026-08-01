@@ -3,9 +3,8 @@ pipeline {
 
     environment {
         // Define your Docker image name and registry credentials ID here
-        DOCKER_IMAGE_NAME = "my-django-app"
-        DOCKER_CREDENTIALS_ID = "dockerhub-credentials-id" // Optional: Replace with your Jenkins credential ID if pushing to a registry
-        REGISTRY_URL = "docker.io" // Optional: Change to your private registry (e.g., AWS ECR, GCP Artifact Registry)
+        DOCKER_IMAGE_NAME = "mywebsite:v1"
+        REGISTRY_URL = ""https://hub.docker.com/repositories/wensley01" // Optional: Change to your private registry (e.g., AWS ECR, GCP Artifact Registry)
     }
 
     stages {
