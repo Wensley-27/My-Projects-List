@@ -24,7 +24,7 @@ pipeline {
       steps {
         // Using the exact credential ID you created in Jenkins (e.g., 'sonarqube-token')
         withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
-          sh 'cd myfirst_ci_cd/spring-boot-app && mvn sonar:sonar -Dsonar.token=$SONAR_TOKEN -Dsonar.host.url=${SONAR_URL}'
+          sh 'cd myfirst_ci_cd/spring-boot-app && mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.11.0.3922:sonar -Dsonar.token=$SONAR_TOKEN -Dsonar.host.url=${SONAR_URL}'
         }
       }
     }
