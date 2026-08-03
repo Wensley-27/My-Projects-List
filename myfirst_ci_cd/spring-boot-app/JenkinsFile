@@ -4,7 +4,7 @@
 pipeline {
   agent {
     docker {
-      image 'wensley01/myfirst_ci_cl-docker-agent:v1'
+      image 'myfirst_ci_cd:v1'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock --add-host=host.docker.internal:host-gateway' //Since Jenkins directly on my your local machine's operating system, This flag maps  container to easily reach host services using host.docker.internal
         }
   }
