@@ -24,9 +24,7 @@ pipeline {
                 cd myfirst_ci_cd/spring-boot-app
                 mvn sonar:sonar \
                   -Dsonar.token=$SONAR_TOKEN \
-                  -Dsonar.host.url=http://172.20.228.202:9000 \
-                  -Dsonar.java.binaries=target/classes \
-            	  -Dsonar.sources=src/main/java
+                  -Dsonar.host.url=http://172.20.228.202:9000 
 		'''
         }
     }
