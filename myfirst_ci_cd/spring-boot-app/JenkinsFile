@@ -26,7 +26,8 @@ pipeline {
                   -Dsonar.token=$SONAR_TOKEN \
                   -Dsonar.host.url=http://172.20.228.202:9000 \
                   -Dsonar.java.binaries=target/classes \
-            '''
+            	  --Dsonar.sources=src/main/java
+		'''
         }
     }
 }
