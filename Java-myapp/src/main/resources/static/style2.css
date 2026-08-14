@@ -1,0 +1,293 @@
+/* =====================================================
+   ABOUT ME
+====================================================== */
+
+#about{
+
+    background:var(--background);
+
+}
+
+#about .card{
+
+    max-width:1000px;
+
+    margin:auto;
+
+    transition:var(--transition);
+
+}
+
+#about .card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:var(--primary);
+
+    box-shadow:0 18px 40px rgba(59,130,246,.18);
+
+}
+
+#about p{
+
+    font-size:17px;
+
+    text-align:justify;
+
+    color:var(--text);
+
+    margin-bottom:18px;
+
+}
+
+#about p:last-child{
+
+    margin-bottom:0;
+
+}
+
+
+/* =====================================================
+   MY STORY
+====================================================== */
+
+#story{
+
+    background:#0F172A;
+
+}
+
+#story .card{
+
+    max-width:1000px;
+
+    margin:auto;
+
+    transition:var(--transition);
+
+}
+
+#story .card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:var(--secondary);
+
+    box-shadow:0 18px 40px rgba(6,182,212,.18);
+
+}
+
+#story p{
+
+    font-size:17px;
+
+    text-align:justify;
+
+    color:var(--text);
+
+    margin-bottom:18px;
+
+}
+
+#story p:last-child{
+
+    margin-bottom:0;
+
+}
+
+
+/* =====================================================
+   Decorative Accent Line
+====================================================== */
+
+#about .card::before,
+#story .card::before{
+
+    content:"";
+
+    display:block;
+
+    width:80px;
+
+    height:4px;
+
+    border-radius:20px;
+
+    margin-bottom:25px;
+
+}
+
+#about .card::before{
+
+    background:var(--primary);
+
+}
+
+#story .card::before{
+
+    background:var(--secondary);
+
+}
+
+
+/* =====================================================
+   Readability
+====================================================== */
+
+#about strong,
+#story strong{
+
+    color:white;
+
+    font-weight:600;
+
+}
+
+#about em,
+#story em{
+
+    color:var(--secondary);
+
+    font-style:normal;
+
+}
+
+
+/* =====================================================
+   Lists (Optional)
+====================================================== */
+
+#about ul,
+#story ul{
+
+    margin-top:20px;
+
+    padding-left:25px;
+
+}
+
+#about li,
+#story li{
+
+    margin-bottom:12px;
+
+    color:var(--text);
+
+}
+
+#about li::marker{
+
+    color:var(--primary);
+
+}
+
+#story li::marker{
+
+    color:var(--secondary);
+
+}
+
+
+/* =====================================================
+   Spacing
+====================================================== */
+
+#about .section-title,
+#story .section-title{
+
+    margin-bottom:50px;
+
+}
+
+#about .container,
+#story .container{
+
+    position:relative;
+
+}
+
+
+/* =====================================================
+   Fade-in Animation
+====================================================== */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+#about .card,
+#story .card{
+
+    animation:fadeUp .8s ease;
+
+}
+
+
+/* =====================================================
+   Responsive
+====================================================== */
+
+@media(max-width:992px){
+
+    #about .card,
+    #story .card{
+
+        padding:30px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    #about p,
+    #story p{
+
+        font-size:16px;
+
+        text-align:left;
+
+    }
+
+    #about .card,
+    #story .card{
+
+        padding:25px;
+
+    }
+
+    #about .card::before,
+    #story .card::before{
+
+        width:60px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    #about .card,
+    #story .card{
+
+        padding:20px;
+
+    }
+
+}

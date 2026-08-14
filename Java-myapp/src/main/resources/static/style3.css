@@ -1,0 +1,468 @@
+/* =====================================================
+   PROFESSIONAL EXPERIENCE
+====================================================== */
+
+#experience{
+
+    background:var(--background);
+
+}
+
+#experience .card{
+
+    max-width:1000px;
+
+    margin:30px auto;
+
+    transition:var(--transition);
+
+    border-left:5px solid var(--primary);
+
+}
+
+#experience .card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 45px rgba(59,130,246,.18);
+
+}
+
+#experience h3{
+
+    margin-bottom:10px;
+
+}
+
+#experience h4{
+
+    color:var(--secondary);
+
+    font-size:17px;
+
+    font-weight:500;
+
+    margin-bottom:20px;
+
+}
+
+#experience p{
+
+    text-align:justify;
+
+    margin-bottom:15px;
+
+}
+
+#experience ul{
+
+    padding-left:25px;
+
+    margin-top:20px;
+
+}
+
+#experience li{
+
+    margin-bottom:12px;
+
+    color:var(--text);
+
+}
+
+#experience li::marker{
+
+    color:var(--primary);
+
+}
+
+
+/* =====================================================
+   CAREER GOALS
+====================================================== */
+
+#career{
+
+    background:#0F172A;
+
+}
+
+#career .card{
+
+    max-width:950px;
+
+    margin:auto;
+
+    border-left:5px solid var(--secondary);
+
+    transition:var(--transition);
+
+}
+
+#career .card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 40px rgba(6,182,212,.20);
+
+}
+
+#career p{
+
+    text-align:justify;
+
+    margin-bottom:18px;
+
+}
+
+
+/* =====================================================
+   CONTACT
+====================================================== */
+
+#contact{
+
+    background:var(--background);
+
+}
+
+.contact-wrapper{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:50px;
+
+    align-items:start;
+
+}
+
+.contact-info{
+
+    background:var(--card);
+
+    padding:35px;
+
+    border-radius:10px;
+
+    border:1px solid var(--border);
+
+}
+
+.contact-info h3{
+
+    margin-bottom:20px;
+
+}
+
+.contact-info p{
+
+    margin-bottom:18px;
+
+}
+
+.contact-info a{
+
+    color:var(--secondary);
+
+}
+
+.contact-info a:hover{
+
+    color:var(--primary);
+
+}
+
+.contact-form{
+
+    background:var(--card);
+
+    padding:35px;
+
+    border-radius:10px;
+
+    border:1px solid var(--border);
+
+}
+
+.contact-form input,
+
+.contact-form textarea{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-bottom:20px;
+
+    background:#1E293B;
+
+    color:white;
+
+    border:1px solid #374151;
+
+    border-radius:6px;
+
+    font-family:Poppins,sans-serif;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+.contact-form input:focus,
+
+.contact-form textarea:focus{
+
+    border-color:var(--primary);
+
+}
+
+.contact-form textarea{
+
+    resize:vertical;
+
+    min-height:180px;
+
+}
+
+.contact-form button{
+
+    border:none;
+
+    cursor:pointer;
+
+}
+
+
+/* =====================================================
+   FOOTER
+====================================================== */
+
+footer{
+
+    background:#050B16;
+
+    border-top:1px solid var(--border);
+
+    padding:40px 0;
+
+}
+
+.footer-container{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+}
+
+.footer-logo{
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:white;
+
+}
+
+.footer-links{
+
+    display:flex;
+
+    gap:25px;
+
+}
+
+.footer-links a{
+
+    color:var(--muted);
+
+    transition:.3s;
+
+}
+
+.footer-links a:hover{
+
+    color:var(--secondary);
+
+}
+
+.footer-copy{
+
+    margin-top:25px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:15px;
+
+}
+
+
+/* =====================================================
+   HOVER EFFECTS
+====================================================== */
+
+.card{
+
+    transition:.35s;
+
+}
+
+.card:hover{
+
+    border-color:var(--primary);
+
+}
+
+.btn{
+
+    box-shadow:0 8px 20px rgba(59,130,246,.25);
+
+}
+
+.btn:hover{
+
+    box-shadow:0 15px 30px rgba(6,182,212,.35);
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+====================================================== */
+
+@media(max-width:1100px){
+
+.contact-wrapper{
+
+    grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:992px){
+
+.footer-container{
+
+    flex-direction:column;
+
+    gap:20px;
+
+    text-align:center;
+
+}
+
+.footer-links{
+
+    justify-content:center;
+
+}
+
+}
+
+@media(max-width:768px){
+
+#experience .card,
+
+#career .card,
+
+.contact-info,
+
+.contact-form{
+
+    padding:28px;
+
+}
+
+.contact-wrapper{
+
+    gap:30px;
+
+}
+
+.footer-links{
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+}
+
+}
+
+@media(max-width:600px){
+
+h1{
+
+    font-size:36px;
+
+}
+
+h2{
+
+    font-size:28px;
+
+}
+
+h3{
+
+    font-size:22px;
+
+}
+
+.section-title{
+
+    font-size:30px;
+
+}
+
+.contact-form input,
+
+.contact-form textarea{
+
+    font-size:15px;
+
+}
+
+.btn{
+
+    width:100%;
+
+    text-align:center;
+
+}
+
+}
+
+@media(max-width:480px){
+
+section{
+
+    padding:60px 0;
+
+}
+
+.footer-logo{
+
+    font-size:20px;
+
+}
+
+.footer-copy{
+
+    font-size:14px;
+
+}
+
+}
