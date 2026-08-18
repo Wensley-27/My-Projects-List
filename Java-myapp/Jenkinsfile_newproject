@@ -41,7 +41,7 @@ stages {
         }
 
         
-    stages('Build Docker Image') {
+    stage ('Build Docker Image') {
       environment {
         DOCKER_IMAGE = "wensley01/my-personalbrand-website:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "Java-myapp/Dockerfile"
@@ -56,7 +56,7 @@ stages {
         }
     }
 
-    stages ('push docker image') {
+    stage ('push docker image') {
       steps {
         script {
           docker.withRegistry('https://hub.docker.com/repositories/wensley01', 'docker-cred') {
@@ -66,7 +66,7 @@ stages {
       }
     }
 
-    stages ('deploy to kubernetes') {
+    stage ('deploy to kubernetes') {
       steps {
         script {
           sh 'kubectl apply -f k8s/deployment.yaml'
