@@ -1,4 +1,4 @@
-Pipeline { 
+pipeline { 
     agents {
         docker {      
         image 'wensley01/my-first-ws:v1'
