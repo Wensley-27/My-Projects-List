@@ -23,7 +23,7 @@ stages {
                 sh 'ls -ltr'
                 sh 'mvn clean package'
             }
-        sh echo "passed the build stage")
+        sh echo ("passed the build stage")
         }
 
     stage ('test stage') // Run the tests using Maven
