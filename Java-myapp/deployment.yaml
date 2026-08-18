@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: personalbrand-website
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: personalbrand-website
+
+  template:
+    metadata:
+      labels:
+        app: personalbrand-website
+
+    spec:
+      containers:
+        - name: personalbrand-website
+
+          image: wensley01/my-personalbrand-website:1
+
+          ports:
+            - containerPort: 9090
+
+          imagePullPolicy: Always
+
