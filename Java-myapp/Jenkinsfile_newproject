@@ -15,7 +15,7 @@ stages {
             echo "passed the checkout stage"
          }
 
-    stage (build stage)
+    stage ('build stage')
     
         // Build the project using Maven
         {
@@ -26,7 +26,7 @@ stages {
         sh echo "passed the build stage")
         }
 
-    stage (test stage) // Run the tests using Maven
+    stage ('test stage') // Run the tests using Maven
         {
           Environment variables {
              SONAR_URL = "http://localhost:9000"
