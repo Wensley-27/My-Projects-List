@@ -1,56 +1,79 @@
 Pipeline { 
     agents{
         docker{      
-        dockerimage name = "wensley01/my-first-ws:v1"
-        arguments "-v /var/run/docker.sock:/var/run/docker.sock" 
+        image 'wensley01/my-first-ws:v1'
+        args '-v /var/run/docker.sock:/var/run/docker.sock'
      }
   }
 
-    stages {checkout}
-        // Checkout the code from the my project repository
+stages {
     
-            github = "https://github.com/Wensley-27/My-Projects-List"
-            sh echo "passed the checkout stage"
+    stage (checkout)
+        // Checkout the code from the my project repository
+            git branch: 'master',
+            url: "https://github.com/Wensley-27/My-Projects-List"
+            echo "passed the checkout stage"
          }
 
-    stages (build stage}
+    stage (build stage)
     
         // Build the project using Maven
         {
-        sh "cd Java-myapp"
-        sh "ls -ltr"
-        sh "mvn clean package"
+            dir ('Java-myapp') {
+                sh 'ls -ltr'
+                sh 'mvn clean package'
+            }
         sh echo "passed the build stage")
         }
-    stages (test stage}
-    
-        // Run the tests using Maven
+
+    stage (test stage) // Run the tests using Maven
         {
-            Environment variables {
-                sonarqube_url = "http://localhost:9000"
+          Environment variables {
+             SONAR_URL = "http://localhost:9000"
         steps {
-        withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) 
+            dir ('Java-myapp') {
+                        withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) 
         {
           sh 'cd Java-myapp'
-          sh 'ls -ltr' 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+          sh 'ls -ltr' 
+          sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
         sh echo "passed the test stage")
         }
 
         
-    stage('Build and Push Docker Image') {
+    stages('Build Docker Image') {
       environment {
         DOCKER_IMAGE = "wensley01/my-personalbrand-website:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "Java-myapp/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
-    
-    
-    stage (Update deployment in Kubernetes cluster stage)
-        // Deploy the application to the Kubernetes cluster
-        {sh "kubectl apply -f k8s/deployment.yaml"
-        sh "kubectl apply -f k8s/service.yaml"
-        sh echo "passed the deploy to kubernetes cluster stage")
-        }  
+
+      steps {
+        dir ('Java-myapp') {
+        sh 'ls -ltr'
+        docker.build(DOCKER_IMAGE, "-f Dockerfile .")
+        sh echo "docker image built successfully"
+        }
     }
+
+    stages ('push docker image') {
+      steps {
+        script {
+          docker.withRegistry('https://hub.docker.com/repositories/wensley01', 'docker-cred') {
+            docker.image(DOCKER_IMAGE).push()
+          }
+        }
+      }
+    }
+
+    stages ('deploy to kubernetes') {
+      steps {
+        script {
+          sh 'kubectl apply -f k8s/deployment.yaml'
+          sh 'kubectl apply -f k8s/service.yaml'
+        }
+      }
+    }
+    
 
 
