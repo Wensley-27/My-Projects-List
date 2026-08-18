@@ -28,7 +28,7 @@ stages {
 
     stage ('test stage') // Run the tests using Maven
         {
-          Environment variables {
+          environment {
              SONAR_URL = "http://localhost:9000"
         steps {
             dir ('Java-myapp') {
