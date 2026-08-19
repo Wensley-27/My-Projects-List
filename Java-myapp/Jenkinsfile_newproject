@@ -1,62 +1,79 @@
 pipeline {
-
     agent {
         docker {
-            image 'wensley01/jenkins_agent:v1'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        image 'wensley01/jenkins_agent:v1'
+        args '-v /var/run/docker.sock:/var/run/docker.sock'
+     }
+  }
+
+stages {
+    stage ('checkout SCM') {
+        // Checkout the code from the my project repository
+            git branch: 'master',
+            url: "https://github.com/Wensley-27/My-Projects-List"
+            echo "passed the checkout stage"
+         }
+
+    stage ('build') {
+        // Build the project using Maven
+        
+            dir ('Java-myapp') {
+                sh 'ls -ltr'
+                sh 'mvn clean package'
+            }
+        echo "passed the build stage"
         }
+        
+  stage('Static Code Analysis') {
+    environment {
+        SONAR_URL = 'http://localhost:9000'
     }
-
-    stages {
-
-        stage('Checkout') {
-            steps {
-
-                git branch: 'master',
-                    url: 'https://github.com/Wensley-27/My-Projects-List.git'
-
-                echo 'Passed the checkout stage'
+    steps {
+        dir('Java-myapp') {
+            withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) 
+            {
+                sh 'ls -ltr'
+                sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
             }
         }
+        echo 'Passed the Static Code Analysis stage'
+    }
+}
+    stage('Build Docker Image') {
 
-         stage('Build and Push Docker Image') {
+    environment {
+        DOCKER_IMAGE = "wensley01/my-personalbrand-website:${BUILD_NUMBER}"
+    }
 
-            environment {
-            DOCKER_IMAGE = "wensley01/my-personalbrand-website:${BUILD_NUMBER}"
-                        }
+    steps {
+        dir('Java-myapp') {
 
-        steps {
+            sh 'ls -ltr'
 
-            dir('Java-myapp') {
             script {
-                def image = docker.build(
-                    DOCKER_IMAGE,
-                    "-f Dockerfile .")
-                docker.withRegistry(
-                    'https://index.docker.io/v1/',
-                    'docker-cred') 
-                {
-                    image.push()
+                docker.build(DOCKER_IMAGE, '-f Dockerfile .')
                 }
 
+            echo 'Docker image built successfully'
             }
-
         }
-
     }
-}
-       
-        stage ('deploy to kubernetes') {
-          steps {
-            script {
-              sh 'kubectl apply -f k8s/deployment.yaml'
-              sh 'kubectl apply -f k8s/service.yaml'
-            }
+
+    stage ('push docker image') {
+      steps {
+        script {
+          docker.withRegistry('https://index.docker.io/v1/', 'docker-cred') {
+            docker.image(DOCKER_IMAGE).push()
           }
+        }
+      }
     }
+
+    stages ('deployment') {
+      steps {
+        script {
+          sh 'kubectl apply -f k8s/deployment.yaml'
+          sh 'kubectl apply -f k8s/service.yaml'
+        }
+      }
     }
-}
-
-    
-
-
