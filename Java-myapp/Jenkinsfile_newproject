@@ -1,83 +1,89 @@
-pipeline { 
-    agents {
-        docker {      
-        image 'wensley01/my-first-ws:v1'
-        args '-v /var/run/docker.sock:/var/run/docker.sock'
-     }
-  }
+pipeline {
 
-stages {
-    stage ('checkout') {
-        // Checkout the code from the my project repository
-            git branch: 'master',
-            url: "https://github.com/Wensley-27/My-Projects-List"
-            echo "passed the checkout stage"
-         }
-        }
-
-    stage ('build stage')
-    
-        // Build the project using Maven
-        {
-            dir ('Java-myapp') {
-                sh 'ls -ltr'
-                sh 'mvn clean package'
-            }
-        echo "passed the build stage"
-        }
-
-    stage ('test stage') // Run the tests using Maven
-        {
-          environment {
-             SONAR_URL = "http://localhost:9000" 
-                       }
-        steps {
-            dir ('Java-myapp') {
-                        withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) 
-        {
-          sh 'cd Java-myapp'
-          sh 'ls -ltr' 
-          sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
-            echo "passed the test stage"
-        }
-    }        
-}
-        
-    stage ('Build Docker Image') {
-      environment {
-        DOCKER_IMAGE = "wensley01/my-personalbrand-website:${BUILD_NUMBER}"
-        // DOCKERFILE_LOCATION = "Java-myapp/Dockerfile"
-        REGISTRY_CREDENTIALS = credentials('docker-cred')
-      }
-      steps {
-        dir ('Java-myapp') {
-        sh 'ls -ltr'
-        docker.build(DOCKER_IMAGE, "-f Dockerfile .")
-        echo "docker image built successfully"
+    agent {
+        docker {
+            image 'wensley01/my-first-ws:v1'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
-}
 
-    stage ('push docker image') {
-      steps {
-        script {
-          docker.withRegistry('https://hub.docker.com/repositories/wensley01', 'docker-cred')
-            docker.image(DOCKER_IMAGE).push()
+    stages {
+
+        stage('Checkout') {
+            steps {
+
+                git branch: 'master',
+                    url: 'https://github.com/Wensley-27/My-Projects-List.git'
+
+                echo 'Passed the checkout stage'
+            }
+        }
+
+        stage('Build') {
+            steps {
+
+                dir('Java-myapp') {
+
+                    sh 'ls -ltr'
+                    sh 'mvn clean package'
+
+                }
+
+                echo 'Passed the build stage'
+            }
+        }
+
+        stage('Test') {
+            steps {
+
+                dir('Java-myapp') {
+
+                    sh 'mvn test'
+
+                }
+
+                echo 'Passed the test stage'
+            }
+        }
+
+    }
+}
+        
+        stage ('Build Docker Image') {
+          environment {
+            DOCKER_IMAGE = "wensley01/my-personalbrand-website:${BUILD_NUMBER}"
+            // DOCKERFILE_LOCATION = "Java-myapp/Dockerfile"
+            REGISTRY_CREDENTIALS = credentials('docker-cred')
+              }
+          steps {
+            dir ('Java-myapp') {
+            sh 'ls -ltr'
+            docker.build(DOCKER_IMAGE, "-f Dockerfile .")
+            echo "docker image built successfully"
+            }
+        }
+    }
+
+        stage ('push docker image') {
+          steps {
+            script {
+              docker.withRegistry('https://hub.docker.com/repositories/wensley01', 'docker-cred')
+                docker.image(DOCKER_IMAGE).push()
+              }
+            }
           }
-        }
-      }
-    
+        
 
-    stage ('deploy to kubernetes') {
-      steps {
-        script {
-          sh 'kubectl apply -f k8s/deployment.yaml'
-          sh 'kubectl apply -f k8s/service.yaml'
-        }
-      }
-}
-}
-}
+        stage ('deploy to kubernetes') {
+          steps {
+            script {
+              sh 'kubectl apply -f k8s/deployment.yaml'
+              sh 'kubectl apply -f k8s/service.yaml'
+            }
+          }
+    }
+    }
+    }
     
 
 
