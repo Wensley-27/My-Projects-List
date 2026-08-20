@@ -6,23 +6,29 @@ pipeline {
      }
   }
 
-stages {
-    stage ('checkout SCM') {
-        // Checkout the code from the my project repository
-            git branch: 'master',
-            url: "https://github.com/Wensley-27/My-Projects-List"
-            echo "passed the checkout stage"
-         }
+stage('Checkout SCM') {
 
-    stage ('build') {
-        // Build the project using Maven
-        
-            dir ('Java-myapp') {
-                sh 'ls -ltr'
-                sh 'mvn clean package'
-            }
-        echo "passed the build stage"
+    steps {
+        git branch: 'master',
+            url: 'https://github.com/Wensley-27/My-Projects-List'
+
+        echo 'Passed the checkout stage'
+    }
+}
+
+stage('Build') {
+
+    steps {
+        dir('Java-myapp') {
+
+            sh 'ls -ltr'
+            sh 'mvn clean package'
+
         }
+
+        echo 'Passed the build stage'
+    }
+}
         
   stage('Static Code Analysis') {
     environment {
