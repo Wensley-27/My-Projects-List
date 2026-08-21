@@ -6,6 +6,11 @@ pipeline {
      }
   }
 
+  environment {
+        DOCKER_IMAGE = "wensley01/my-personalbrand-website:${BUILD_NUMBER}"
+    }
+
+
 stages {
 stage('Checkout SCM') {
 
@@ -49,16 +54,13 @@ stage('Build') {
 }
 
 stage('Build Docker Image') {
-
-    environment {
-        DOCKER_IMAGE = "wensley01/my-personalbrand-website:${BUILD_NUMBER}"
-    }
-
-    steps {
+steps {
+ dir('Java-myapp') {
         script {
             docker.build(DOCKER_IMAGE, '-f Dockerfile .')
         }
     }
+}
 }
    
 stage('Push Docker Image') {
