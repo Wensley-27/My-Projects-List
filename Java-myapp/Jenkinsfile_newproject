@@ -47,8 +47,21 @@ stage('Build') {
         echo 'Passed the Static Code Analysis stage'
     }
 }
+
+stage('Build Docker Image') {
+
+    environment {
+        DOCKER_IMAGE = "wensley01/my-personalbrand-website:${BUILD_NUMBER}"
+    }
+
+    steps {
+        script {
+            docker.build(DOCKER_IMAGE, '-f Dockerfile .')
+        }
+    }
+}
    
-   stage('Push Docker Image') {
+stage('Push Docker Image') {
 
     steps {
         script {
