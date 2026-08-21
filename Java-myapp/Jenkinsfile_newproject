@@ -57,7 +57,7 @@ stage('Build Docker Image') {
 steps {
  dir('Java-myapp') {
         script {
-            docker.build(DOCKER_IMAGE, '-f Dockerfile .')
+            docker.build(DOCKER_IMAGE, '.')
         }
     }
 }
