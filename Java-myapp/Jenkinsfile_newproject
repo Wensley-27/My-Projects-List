@@ -53,6 +53,26 @@ stage('Build') {
     }
 }
 
+
+stage('Docker Permission Check') {
+    steps {
+        sh '''
+            echo "===== USER ====="
+            whoami
+            id
+
+            echo "===== DOCKER SOCKET ====="
+            ls -ln /var/run/docker.sock
+
+            echo "===== DOCKER GROUP ====="
+            getent group 106 || true
+
+            echo "===== DOCKER VERSION ====="
+            docker version
+        '''
+    }
+}
+
 stage('Build Docker Image') {
 steps {
  dir('Java-myapp') {
