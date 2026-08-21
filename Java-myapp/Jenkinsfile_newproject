@@ -1,10 +1,10 @@
 pipeline {
     agent {
-        docker {
+    docker {
         image 'wensley01/jenkins_agent:v3'
-        args '-v /var/run/docker.sock:/var/run/docker.sock --network jenkins-sonar'
-     }
-  }
+        args '-v /var/run/docker.sock:/var/run/docker.sock --group-add 106 --network jenkins-sonar'
+    }
+}
 
   environment {
         DOCKER_IMAGE = "wensley01/my-personalbrand-website:${BUILD_NUMBER}"
