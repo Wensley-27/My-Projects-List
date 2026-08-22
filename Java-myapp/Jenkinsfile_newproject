@@ -123,8 +123,6 @@ stage('Update Deployment File') {
                 git config user.email "wensleyrajkumar@outlook.com"
                 git config user.name "Wensley-27"
                 '''
-                sed -i 's/replaceImageTag/42/g' Java-myapp/deployment.yaml
-
                 sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" Java-myapp/deployment.yaml
                 git add deployment.yaml
                 git diff --cached --quiet || git commit -m "Update deployment image to version ${BUILD_NUMBER}"
