@@ -121,11 +121,11 @@ stage('Update Deployment File') {
                 git status
                 git config user.email "wensleyrajkumar@outlook.com"
                 git config user.name "Wensley-27"
-                '''
                 sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" Java-myapp/deployment.yaml
                 git add deployment.yaml
                 git diff --cached --quiet || git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                 git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:master
+                 '''
         }
     }
 }
