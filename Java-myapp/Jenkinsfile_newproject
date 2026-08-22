@@ -108,6 +108,26 @@ stage('Update Deployment File') {
             sh '''
                 git config user.email "wensleyrajkumar@outlook.com"
                 git config user.name "Wensley-27"
+                sh '''
+                echo "===== WORKSPACE ====="
+                pwd
+            
+                echo "===== WORKSPACE CONTENT ====="
+                ls -la
+            
+                echo "===== ALL YAML FILES ====="
+                find . -type f \\( -name "*.yaml" -o -name "*.yml" \\)
+            
+                echo "===== DEPLOYMENT YAML ====="
+                find . -name "deployment.yaml"
+            
+                echo "===== GIT STATUS ====="
+                git status
+                git config user.email "wensleyrajkumar@outlook.com"
+                git config user.name "Wensley-27"
+                '''
+                sed -i 's/replaceImageTag/42/g' deployment.yaml
+
                 sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployment.yaml
                 git add deployment.yaml
                 git diff --cached --quiet || git commit -m "Update deployment image to version ${BUILD_NUMBER}"
