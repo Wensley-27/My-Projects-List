@@ -115,9 +115,6 @@ stage('Update Deployment File') {
                 echo "===== WORKSPACE CONTENT ====="
                 ls -la
             
-                echo "===== ALL YAML FILES ====="
-                find . -type f \\( -name "*.yaml" -o -name "*.yml" \\)
-            
                 echo "===== DEPLOYMENT YAML ====="
                 find . -name "deployment.yaml"
             
