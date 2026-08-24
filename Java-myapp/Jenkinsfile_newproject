@@ -10,17 +10,6 @@ pipeline {
         DOCKER_IMAGE = "wensley01/my-personalbrand-website:${BUILD_NUMBER}"
     }
 
-parameters {
-        choice(
-            name: 'START_STAGE',
-            choices: [
-                'Full Pipeline',
-                'Update Deployment File'
-            ],
-            description: 'Update Deployment File'
-        )
-    }
-
 stages {
 stage('Checkout SCM') {
 
