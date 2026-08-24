@@ -112,19 +112,36 @@ stage('Update Deployment File') {
             
                 echo "===== WORKSPACE CONTENT ====="
                 ls -la
+
+                echo "===== GIT ROOT ====="
+                git rev-parse --show-toplevel
             
                 echo "===== DEPLOYMENT YAML ====="
                 find . -name "deployment.yaml"
+
+                echo "===== DEPLOYMENT FILE BEFORE UPDATE ====="
+                cat Java-myapp/deployment.yaml
             
                 echo "===== GIT STATUS ====="
                 git status
-                git config user.email "wensleyrajkumar@outlook.com"
-                git config user.name "Wensley-27"
+                echo "===== UPDATING IMAGE TAG ====="
                 sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" Java-myapp/deployment.yaml
+                cat Java-myapp/deployment.yaml
+                echo "===== GIT STATUS AFTER UPDATE ====="
+                git status
+                echo "===== STAGING DEPLOYMENT FILE ====="
                 git add Java-myapp/deployment.yaml
+                echo "===== STAGED CHANGES ====="
+                git diff --cached
+            
+                echo "===== COMMITTING CHANGES ====="
                 git diff --cached --quiet || git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+            
+                echo "===== PUSHING CHANGES TO GITHUB ====="
                 git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:master
-                 '''
+            
+                echo "===== DEPLOYMENT FILE UPDATE COMPLETED ====="
+                '''
         }
     }
 }
