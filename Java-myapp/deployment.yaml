@@ -20,7 +20,7 @@ spec:
       containers:
         - name: personalbrand-website
 
-          image: wensley01/my-personalbrand-website:replaceImageTag
+          image: wensley01/my-personalbrand-website:56
 
           ports:
             - containerPort: 9090
