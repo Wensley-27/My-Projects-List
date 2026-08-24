@@ -9,14 +9,6 @@ pipeline {
       }
     }
 
-    stage('Build and Test') {
-      steps {
-        sh 'ls -ltr'
-        // Build the project and create a JAR file
-        sh 'cd myfirst_ci_cd/spring-boot-app && mvn clean package'
-      }
-    }
-
 stage('Static Code Analysis') {
       steps {
         withEnv(['PATH+MAVEN=/opt/apache-maven-3.9.6/bin']) {
